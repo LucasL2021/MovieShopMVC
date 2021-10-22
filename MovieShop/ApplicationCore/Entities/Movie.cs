@@ -28,5 +28,16 @@ namespace ApplicationCore.Entities
         public string CreatedBy { get; set; }
         // rating column should come from review table
         public decimal? Rating { get; set; }
+
+        //Navigation property
+        public ICollection<Trailer> Trailers { get; set; }
+        public ICollection<MovieGenre> Genres { get; set; }
+        public ICollection<MovieCast> Casts { get; set; }
+        public ICollection<Review> Reviews { get; set; }
+        public ICollection<MovieCrew> Crews { get; set; }
+        public ICollection<Purchase> Purchases { get; set; }
+        public ICollection<Favorite> Favorites { get; set; }
+
+
     }
 }

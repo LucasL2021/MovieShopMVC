@@ -40,9 +40,15 @@
         {
         margin-top: 10px;
         }
+        .character1
+        {
+        position:absolute;
+            left: 490px;
+        }
         .actor
         {
-            width: 30px;
+        position:absolute;
+            left: 190px;
         }
 
 
@@ -99,11 +105,11 @@
         <h3>CAST</h3>
             @foreach(var cast in @Model.Casts)
                 {  <a href=@cast.ProfilePath class="list-group-item list-group-item-action">
-                    <ul class="list-group list-group-horizontal" >
-                      <li class="list-group-item"><img src=@cast.ProfilePath class="rounded-circle" alt=@cast.Name height="40"></li>
-                      <li class="list-group-item"><span class="actor">@cast.Name</span></li>
-                      <li class="list-group-item"><span class="actor">@cast.Character</span></li>
-                    </ul>
+                      <img src=@cast.ProfilePath class="rounded-circle" alt=@cast.Name height="40">
+                      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                      <span class="actor">@cast.Name</span>
+                        
+                      <span class="character1">@cast.Character</span>
                     </a>
                 }
             

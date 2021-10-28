@@ -1,0 +1,116 @@
+﻿@model ApplicationCore.Models.MovieDetailsResponseModel
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #row1
+        {
+            background-image: url("@Model.BackdropUrl");
+        }
+        h1
+        {
+            color: white;
+        }
+        p
+        {
+            color: white;
+        }
+        #lengthAndDate
+        {
+            color: gray;
+            font-weight: bold;
+        }
+        #reviewBtn
+        {
+            background-color: black;
+            color: white;
+            height: 30px;
+            width: 130px;
+            margin-bottom: 10px;
+        }
+        #buyBtn
+        {
+            background-color: white;
+            color: black;
+            height: 30px;
+            width: 130px;
+        }
+        #trailerRow
+        {
+        margin-top: 10px;
+        }
+        .actor
+        {
+            width: 30px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<div class="container">
+  <div class="row" id="row1">
+    <div class="col-4" align="right">
+      <img src="@Model.PosterUrl"  width="70%"/>
+    </div>
+    <div class="col-6">
+      <h1>@Model.Title</h1>
+        <font size="2" color="white">@Model.Tagline</font>
+        <div>
+        <span id="lengthAndDate">@Model.RunTime m | @Model.ReleaseDate.Value.Year</span>
+        <span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+        @foreach(var GenreModel in @Model.Genres)
+            {
+                <span class="badge badge-pill badge-secondary">@GenreModel.Name</span>
+            }
+        <br/>
+        <font size="6"> <span class="badge badge-success" height="100">@String.Format("{0:0.0}", @Model.Rating)</span></font>
+        <p>@Model.Overview</p>
+        </div>
+    </div>
+      <div class="col-2" align="right">
+        <br/><br/>
+        <input type="submit" value="REVIEW" id="reviewBtn">
+        <br/>
+        <input type="submit" value="BUY $@Model.Price" id="buyBtn" >
+      </div>
+  </div>
+    <div class="row" >
+        <div class="col-4">
+            <h3>MOVIE FACTS</h3>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">Release Date&nbsp<span class="badge badge-pill badge-secondary">@Model.ReleaseDate.Value</span></li>
+            <li class="list-group-item">Run Time&nbsp<span class="badge badge-pill badge-secondary">@Model.RunTime m</span></li>
+            <li class="list-group-item">Box Office&nbsp<span class="badge badge-pill badge-secondary"> @String.Format("{0:C2}", @Model.Revenue)</span></li>
+            <li class="list-group-item">Budget&nbsp<span class="badge badge-pill badge-secondary">@String.Format("{0:C2}", @Model.Budget)</span></li>
+            </ul>
+            <br/>
+            <h3>TRAILERS</h3>
+            <ul class="list-group list-group-flush">
+            @foreach(var trailer in @Model.Trailers)
+                {
+                      <li class="list-group-item"><a href=@trailer.TrailerUrl>@trailer.Name</a></li>
+                }
+            </ul>
+        </div>
+    <div class="col-8">
+        <h3>CAST</h3>
+            @foreach(var cast in @Model.Casts)
+                {  <a href=@cast.ProfilePath class="list-group-item list-group-item-action">
+                    <ul class="list-group list-group-horizontal" >
+                      <li class="list-group-item"><img src=@cast.ProfilePath class="rounded-circle" alt=@cast.Name height="40"></li>
+                      <li class="list-group-item"><span class="actor">@cast.Name</span></li>
+                      <li class="list-group-item"><span class="actor">@cast.Character</span></li>
+                    </ul>
+                    </a>
+                }
+            
+        </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

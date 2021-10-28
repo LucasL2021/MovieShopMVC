@@ -26,11 +26,6 @@ namespace Infrastructure.Data
             modelBuilder.Entity<Review>(ConfigureReview);
             modelBuilder.Entity<MovieCrew>(ConfigureMovieCrew);
             modelBuilder.Entity<UserRole>(ConfigureUserRole);
-
-
-
-
-
         }
 
         private void ConfigureUserRole(EntityTypeBuilder<UserRole> builder)
@@ -120,8 +115,5 @@ namespace Infrastructure.Data
         public DbSet<MovieCrew> MovieCrews { get; set; }
         public DbSet<Favorite> Favorites { get; set; }
         public DbSet<UserRole> userRoles { get; set; }
-
-
-
     }
 }

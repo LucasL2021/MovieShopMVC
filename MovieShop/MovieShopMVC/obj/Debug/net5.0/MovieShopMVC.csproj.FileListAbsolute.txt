@@ -155,3 +155,4 @@ D:\Antra\MovieShopMVC\MovieShop\MovieShopMVC\obj\Debug\net5.0\Razor\Views\Accoun
 D:\Antra\MovieShopMVC\MovieShop\MovieShopMVC\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\Antra\MovieShopMVC\MovieShop\MovieShopMVC\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\Antra\MovieShopMVC\MovieShop\MovieShopMVC\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
+D:\Antra\MovieShopMVC\MovieShop\MovieShopMVC\obj\Debug\net5.0\Razor\Views\Shared\_LoginInfoPartial.cshtml.g.cs

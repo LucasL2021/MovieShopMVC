@@ -7,6 +7,12 @@
         #row1
         {
             background-image: url("@Model.BackdropUrl");
+        height: 28.1rem;
+    width: 100%;
+    background-size: cover;
+    background-color: #07131b;
+    background-blend-mode: overlay;
+
         }
         h1
         {
@@ -16,7 +22,7 @@
         {
             color: white;
         }
-        #lengthAndDate
+        #lengthAndDate 
         {
             color: gray;
             font-weight: bold;
@@ -87,7 +93,7 @@
         <div class="col-4">
             <h3>MOVIE FACTS</h3>
             <ul class="list-group list-group-flush">
-            <li class="list-group-item">Release Date&nbsp<span class="badge badge-pill badge-secondary">@Model.ReleaseDate.Value</span></li>
+            <li class="list-group-item">Release Date&nbsp<span class="badge badge-pill badge-secondary">@Model.ReleaseDate.Value.ToShortDateString()</span></li>
             <li class="list-group-item">Run Time&nbsp<span class="badge badge-pill badge-secondary">@Model.RunTime m</span></li>
             <li class="list-group-item">Box Office&nbsp<span class="badge badge-pill badge-secondary"> @String.Format("{0:C2}", @Model.Revenue)</span></li>
             <li class="list-group-item">Budget&nbsp<span class="badge badge-pill badge-secondary">@String.Format("{0:C2}", @Model.Budget)</span></li>

@@ -14,6 +14,7 @@ namespace ApplicationCore.Entities
         public int UserId { get; set; }
         public decimal Rating { get; set; }
         public string? ReviewText { get; set; }
+        public string Name { get; set; }
 
         //Navigation Property
         public User User { get; set; }

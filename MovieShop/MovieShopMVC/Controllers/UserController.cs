@@ -1,11 +1,20 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MovieShopMVC.Services;
 
 namespace MovieShopMVC.Controllers
 {
     // all the action methods in User Controller should work only when user is Authenticated (login success)
     public class UserController : Controller
     {
+        private readonly ICurrentUserService _currentUserService;
+        public UserController(ICurrentUserService currentUserService)
+        {
+            _currentUserService = currentUserService;
+        }
         [HttpPost]
         public async Task<IActionResult> Purchase()
         {
@@ -28,16 +37,34 @@ namespace MovieShopMVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Purchases(int id)
+        // Filters in ASP.NET 
+        [Authorize]
+        public async Task<IActionResult> Purchases()
         {
+            // get the id from HttpCOntext.User.Claims
+            /*var userIdentity = this.User.Identity;
+            if (userIdentity != null && userIdentity.IsAuthenticated)
+            {
+                // call the databsae to get the data
+                return View();
+            }  
+            RedirectToAction("Login", "Account");*/
             // get all the movies purchased by user => List<MovieCard> 
+            //int userId = Convert.ToInt32((HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value));
+            // call userservie that will give list od moviesCard Models that this user purchased
+            // Purchase, dbContext.Purchase.where(u=> u.UserId == id);
+            var userId = _currentUserService.UserId;
+            // pass the userId to the userservice, that will pass to UserRepository
             return View();
+
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Favorites(int id)
         {
             // get all movies favorited by that user
+            int userId = Convert.ToInt32((HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value));
             return View();
         }
 

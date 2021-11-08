@@ -17,22 +17,18 @@ namespace Infrastructure.Services
         private readonly IPurchaseRepository _purchaseRepository;
         private readonly IFavoriteRepository _favoriteRepository;
         private readonly IReviewRepository _reviewRepository;
+        private readonly ICastRepository _castRepository;
+        private readonly IGenreRepository _genreRepository;
 
-        public UserService(IPurchaseRepository purchaseRepository)
-        {
-            _purchaseRepository = purchaseRepository;
-        }
-        public UserService(IUserRepository userRepository)
+
+        public UserService(IUserRepository userRepository, IPurchaseRepository purchaseRepository, IFavoriteRepository favoriteRepository, IReviewRepository reviewRepository, ICastRepository castRepository, IGenreRepository genreRepository)
         {
             _userRepository = userRepository;
-        }
-        public UserService(IFavoriteRepository favoriteRepository)
-        {
+            _purchaseRepository = purchaseRepository;
             _favoriteRepository = favoriteRepository;
-        }
-        public UserService(IReviewRepository reviewRepository)
-        {
             _reviewRepository = reviewRepository;
+            _castRepository = castRepository;
+            _genreRepository = genreRepository;
         }
 
         public async Task<int> RegisterUser(UserRegisterRequestModel requestModel)
@@ -275,12 +271,30 @@ namespace Infrastructure.Services
                     UserId = review.UserId,
                     MovieId = review.MovieId,
                     ReviewText = review.ReviewText,
-                    Rating = review.Rating,
-                    Name = review.Name
+                    Rating = review.Rating
                 };
                 userResponse.MovieReviews.Add(reviewResponse);
             }
             return userResponse;
+        }
+        public async Task<CastResponseModel> GetCastById(int id) 
+        {
+            var cast = await _castRepository.GetById(id);
+            var castResponse = new CastResponseModel
+            {
+                Id = cast.Id,
+                Name = cast.Name,
+                Gender = cast.Gender,
+                TmdbUrl = cast.Gender,
+                ProfilePath = cast.ProfilePath
+            };
+
+            return castResponse;
+        }
+        public async Task<IEnumerable<Genre>> GetGenres()
+        {
+            var genres = await _genreRepository.GetAll();
+            return genres;
         }
     }
 }

@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" id="row1">
+            <div class="col-4" id = row1col1>
+            <img src="{{movie.posterUrl}}"  width="70%"/>
+            </div>
+            <div class="col-6">
+            <h1>{{movie.title}}</h1>
+                <font size="2" color="white">movie.Tagline</font>
+                <div>
+                <span id="lengthAndDate">movie.RunTime m | movie.ReleaseDate.Value.Year</span>
+                <span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                    <span class="badge badge-pill badge-secondary" *ngFor="let GenreModel of movie.genres">GenreModel.Name</span>
+                <br/>
+                <!-- <font size="6"> <span class="badge badge-success" height="100">@String.Format("{0:0.0}", movie.Rating)</span></font> -->
+                <p>movie.Overview</p>
+                </div>
+            </div>
+            <!-- <div class="col-2" align="right"> -->
+                <br/><br/>
+                <input type="submit" value="REVIEW" id="reviewBtn">
+                <br/>
+                <input type="submit" value="BUY $movie.Price" id="buyBtn" />
+            </div>
+        <!-- </div> -->
+        <div class="row" >
+            <div class="col-4">
+                <h3>MOVIE FACTS</h3>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">Release Date&nbsp<span class="badge badge-pill badge-secondary">movie.ReleaseDate.Value.ToShortDateString()</span></li>
+                <li class="list-group-item">Run Time&nbsp<span class="badge badge-pill badge-secondary">movie.RunTime m</span></li>
+                <!-- <li class="list-group-item">Box Office&nbsp<span class="badge badge-pill badge-secondary"> @String.Format("{0:C2}", movie.Revenue)</span></li> -->
+                <!-- <li class="list-group-item">Budget&nbsp<span class="badge badge-pill badge-secondary">@String.Format("{0:C2}",movie.Budget)</span></li> -->
+                </ul>
+                <br/>
+                <h3>TRAILERS</h3>
+                <ul class="list-group list-group-flush" *ngFor="let trailer of movie.trailers">
+                    <li class="list-group-item"><a [routerLink]="[ '/path', trailer.trailerUrl ]">trailer.Name</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-8">
+                <h3>CAST</h3>
+                <a href=@cast.ProfilePath class="list-group-item list-group-item-action" *ngFor="let cast of movie.casts">
+                <img src=@cast.ProfilePath class="rounded-circle" alt=@cast.Name height="40"/>
+                <span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                <span class="actor">cast.Name</span>
+                    
+                <span class="character1">cast.Character</span>
+                </a>
+            </div>
+      </div>
+    </div>
+    
+</body>
+
+</html>

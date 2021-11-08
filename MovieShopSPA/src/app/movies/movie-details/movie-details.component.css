@@ -1,0 +1,56 @@
+#row1
+        {
+            background-image: "{{movie.backdropUrl}}";
+        height: 28.1rem;
+    width: 100%;
+    background-size: cover;
+    background-color: #07131b;
+    background-blend-mode: overlay;
+
+        }
+        #row1col1
+        {
+            text-align: right;
+        }
+        h1
+        {
+            color: white;
+        }
+        p
+        {
+            color: white;
+        }
+        #lengthAndDate 
+        {
+            color: gray;
+            font-weight: bold;
+        }
+        #reviewBtn
+        {
+            background-color: black;
+            color: white;
+            height: 30px;
+            width: 130px;
+            margin-bottom: 10px;
+        }
+        #buyBtn
+        {
+            background-color: white;
+            color: black;
+            height: 30px;
+            width: 130px;
+        }
+        #trailerRow
+        {
+        margin-top: 10px;
+        }
+        .character1
+        {
+        position:absolute;
+            left: 490px;
+        }
+        .actor
+        {
+        position:absolute;
+            left: 190px;
+        }

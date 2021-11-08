@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ApplicationCore.Models;
+using ApplicationCore.Entities;
+using System.Collections.Generic;
 
 namespace ApplicationCore.ServiceInterfaces
 {
@@ -21,6 +23,8 @@ namespace ApplicationCore.ServiceInterfaces
         Task UpdateMovieReview(ReviewRequestModel reviewRequest);
         Task DeleteMovieReview(int userId, int movieId);
         Task<UserReviewResponseModel> GetAllReviewsByUser(int id);
+        Task<CastResponseModel> GetCastById(int id);
+        Task<IEnumerable<Genre>> GetGenres();
 
     }
 }

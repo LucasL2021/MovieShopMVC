@@ -33,5 +33,6 @@ namespace Infrastructure.Repositories
             var reviews = await _dbContext.Reviews.Where(p => p.MovieId == movieId).ToListAsync();
             return reviews;
         }
+
     }
 }

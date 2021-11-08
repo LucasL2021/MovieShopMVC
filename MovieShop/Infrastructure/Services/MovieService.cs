@@ -31,6 +31,52 @@ namespace Infrastructure.Services
 
             return movieCards;
         }
+        public async Task<IEnumerable<MovieCardResponseModel>> GetTop30RatedMovies()
+        {
+            var movies = await _movieRepository.GetTop30RatedMovies();
+
+            var movieCards = new List<MovieCardResponseModel>();
+            foreach (var movie in movies)
+                movieCards.Add(new MovieCardResponseModel
+                {
+                    Id = movie.Id,
+                    PosterUrl = movie.PosterUrl,
+                    Title = movie.Title
+                });
+
+            return movieCards;
+        }
+
+        public async Task<List<MovieCardResponseModel>> GetMoviesByGenreId(int id)
+        {
+            var movies = await _movieRepository.GetMoviesByGenreId(id);
+            
+            var movieCards = new List<MovieCardResponseModel>();
+            foreach (var movie in movies)
+                movieCards.Add(new MovieCardResponseModel
+                {
+                    Id = movie.MovieId,
+                    PosterUrl = movie.Movie.PosterUrl,
+                    Title = movie.Movie.Title
+                });
+
+            return movieCards;
+        }
+        public async Task<List<ReviewResponseModel>> GetMovieReviews(int id)
+        {
+            var reviews = await _movieRepository.GetMovieReviews(id);
+            var responseCards = new List<ReviewResponseModel>();
+            foreach (var r in reviews)
+                responseCards.Add(new ReviewResponseModel
+                {
+                    MovieId = r.MovieId,
+                    UserId = r.UserId,
+                    ReviewText = r.ReviewText,
+                    Rating = r.Rating
+                });
+
+            return responseCards;
+        }
 
         public async Task<MovieDetailsResponseModel> GetMovieDetails(int id)
         {
@@ -83,5 +129,9 @@ namespace Infrastructure.Services
                 });
             return movieDetails;
         }
+
+       
+
+        
     }
 }

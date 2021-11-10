@@ -1,58 +1,76 @@
-<html>
+<html> 
 
 <head>
-    
 </head>
 
 <body>
     <div class="container">
-        <div class="row" id="row1">
+        <div class="row"
+         style="
+            background-image: url({{movie.backdropUrl}});
+            height: 28.1rem;
+            width: 100%;
+            background-size: cover;
+            background-color: #07131b;
+            background-blend-mode: overlay;">
             <div class="col-4" id = row1col1>
             <img src="{{movie.posterUrl}}"  width="70%"/>
             </div>
             <div class="col-6">
             <h1>{{movie.title}}</h1>
-                <font size="2" color="white">movie.Tagline</font>
+                <font size="2" color="white">{{movie.tagline}}</font>
                 <div>
-                <span id="lengthAndDate">movie.RunTime m | movie.ReleaseDate.Value.Year</span>
-                <span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-                    <span class="badge badge-pill badge-secondary" *ngFor="let GenreModel of movie.genres">GenreModel.Name</span>
+                <span id="lengthAndDate"> {{movie.runTime}} m | {{movie.releaseDate.substr(0, 4)}}</span>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span class="badge badge-pill badge-secondary" *ngFor="let GenreModel of movie.genres">{{GenreModel.name}}</span>
                 <br/>
-                <!-- <font size="6"> <span class="badge badge-success" height="100">@String.Format("{0:0.0}", movie.Rating)</span></font> -->
-                <p>movie.Overview</p>
+                <!-- 7-8 warning -7 danger -->
+                <!-- [ngClass]="{'class': true}" -->
+                <!-- <span class="badge badge-success" height="100" [(ngModel)]="greaterThan8">{{movie.rating.toFixed(1)}}</span> -->
+                <!-- <div [ngClass]="movie.rating >= 8 ? 'badge badge-success' : ' '">{{movie.rating.toFixed(1)}}</div>
+                <div [ngClass]="(movie.rating >= 7) && (movie.rating < 8) ? 'badge badge-warning' : ' '">{{movie.rating.toFixed(1)}}</div>
+                <div [ngClass]="movie.rating < 7 ? 'badge badge-danger' : ' '">{{movie.rating.toFixed(1)}}</div> -->
+                <div id="ratingBadge" [ngClass]="{'badge badge-success': movie.rating >= 8, 'badge badge-warning':(movie.rating >= 7) && (movie.rating < 8), 'badge badge-danger': movie.rating < 7}">{{movie.rating.toFixed(1)}}</div>
+                <p>{{movie.overview}}</p>
                 </div>
             </div>
-            <!-- <div class="col-2" align="right"> -->
+            <div class="col-2" align="right">
                 <br/><br/>
                 <input type="submit" value="REVIEW" id="reviewBtn">
                 <br/>
-                <input type="submit" value="BUY $movie.Price" id="buyBtn" />
+                <div ng-if="true">
+                    <input type="submit" value="BUY ${{movie.price.toFixed(2)}}" id="buyBtn" />
+                </div>
+                <div ng-if="false">
+                    <input type="submit" value="WATCH" id="buyBtn" />
+                </div>
+                
             </div>
-        <!-- </div> -->
+        </div>
         <div class="row" >
             <div class="col-4">
                 <h3>MOVIE FACTS</h3>
                 <ul class="list-group list-group-flush">
-                <li class="list-group-item">Release Date&nbsp<span class="badge badge-pill badge-secondary">movie.ReleaseDate.Value.ToShortDateString()</span></li>
-                <li class="list-group-item">Run Time&nbsp<span class="badge badge-pill badge-secondary">movie.RunTime m</span></li>
-                <!-- <li class="list-group-item">Box Office&nbsp<span class="badge badge-pill badge-secondary"> @String.Format("{0:C2}", movie.Revenue)</span></li> -->
-                <!-- <li class="list-group-item">Budget&nbsp<span class="badge badge-pill badge-secondary">@String.Format("{0:C2}",movie.Budget)</span></li> -->
+                <li class="list-group-item">Release Date&nbsp;<span class="badge badge-pill badge-secondary">{{movie.releaseDate.substr(0, 10)}}</span></li>
+                <li class="list-group-item">Run Time&nbsp;<span class="badge badge-pill badge-secondary">{{movie.runTime}} m</span></li>
+                <li class="list-group-item">Box Office&nbsp;<span class="badge badge-pill badge-secondary"> ${{movie.revenue}}</span></li>
+                <li class="list-group-item">Budget&nbsp;<span class="badge badge-pill badge-secondary">${{movie.budget}}</span></li>
                 </ul>
                 <br/>
                 <h3>TRAILERS</h3>
                 <ul class="list-group list-group-flush" *ngFor="let trailer of movie.trailers">
-                    <li class="list-group-item"><a [routerLink]="[ '/path', trailer.trailerUrl ]">trailer.Name</a></li>
+                    <li class="list-group-item"><a href="{{trailer.trailerUrl}}">{{trailer.name}}</a></li>
                 </ul>
             </div>
             
             <div class="col-8">
                 <h3>CAST</h3>
-                <a href=@cast.ProfilePath class="list-group-item list-group-item-action" *ngFor="let cast of movie.casts">
-                <img src=@cast.ProfilePath class="rounded-circle" alt=@cast.Name height="40"/>
-                <span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-                <span class="actor">cast.Name</span>
+                <a href={{cast.profilePath}} class="list-group-item list-group-item-action" *ngFor="let cast of movie.casts">
+                <img src={{cast.profilePath}} class="rounded-circle" alt={{cast.name}} height="40"/>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span class="actor">{{cast.name}}</span>
                     
-                <span class="character1">cast.Character</span>
+                <span class="character1">{{cast.character}}</span>
                 </a>
             </div>
       </div>

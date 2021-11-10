@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/core/services/movie.service';
 import { Movie } from 'src/app/shared/models/movie';
@@ -28,7 +28,7 @@ export class MovieDetailsComponent implements OnInit {
           this.movieService.getMovieDetails(this.id)
             .subscribe(
               m => {
-                this.movie = m;
+                this.movie = (m);
                 console.log(this.movie);
               }
             );
